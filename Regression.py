@@ -1,6 +1,7 @@
-
-
-
+### MSDS 692 Project
+### Tom Teasdale
+### Christy Pearson (Instructor)
+### Regression Analysis and Predictions
 
 
 
@@ -12,7 +13,7 @@ from sklearn.linear_model import LinearRegression
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from sklearn.metrics import mean_squared_error
 import plotly.graph_objects as go
-
+from PIL import Image
 
 
 os.chdir("C:/Users/megal/Desktop/MSDS692Project")
@@ -416,10 +417,9 @@ five = ARMAmodel.predict(38)
 six = ARMAmodel.predict(39)
 
 future = {'Year' : ['2020', '2021', '2022', '2023', '2024', '2025', '2026'], 
-          'Area' : [zero, one, two, three, four, five, six]}
+          'Area' : [236122.43, 229718.01, 223555.71, 216315.94, 210350.89, 204574.55, 198671.35]}
 
 pred = pd.DataFrame(future)
-
 
 
 fig = go.Figure(data=[go.Table(
@@ -431,7 +431,22 @@ fig = go.Figure(data=[go.Table(
                align='left'))
 ])
 
-fig.show()
+fig.write_image('table.png')
+
+fig = go.Figure(go.Indicator(
+    mode = "number+gauge+delta",
+    gauge = {'shape': "bullet"},
+    delta = {'reference': 204574.55},
+    value = 198671.35,
+    domain = {'x': [0.1, 1], 'y': [0.2, 0.9]},
+    title = {'text': "Area, 2025-2026"}))
+
+fig.update_layout(
+    width=1600
+)
+
+fig.write_image('card7.png')
+
 
 
 
